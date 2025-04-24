@@ -1,16 +1,23 @@
 package com.example.five_puzzle_api.util;
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Value;
+import javax.crypto.SecretKey;
+
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JWTutil {
-    @Value("${jwt.key}") private String SECRET_KEY;
+    private final SignatureAlgorithm alg = SignatureAlgorithm.HS512;
+    private final SecretKey SECRET_KEY = Keys.secretKeyFor(alg);
     private final long EXPIRATION_TIME = 36000000; // 1 hour in milliseconds
+
+    public JWTutil(){
+
+    }
 
     
     public String generateToken(String username) {
@@ -21,7 +28,7 @@ public class JWTutil {
                 .setSubject(username)
                 .setIssuedAt(currentDate)
                 .setExpiration(expirationDate)
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .signWith(SECRET_KEY)
                 .compact();
         return token;
     }

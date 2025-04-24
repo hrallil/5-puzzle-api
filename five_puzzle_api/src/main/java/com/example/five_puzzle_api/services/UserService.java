@@ -63,4 +63,14 @@ public class UserService {
         }
         return null;
     }
+
+    public User[] getAllUsers() {
+        User[] users = new User[data.getUsers().size()];
+        int i = 0;
+        for (String id : data.getUsers().keySet()) {
+            users[i] = data.getUsers().get(id);
+            i++;
+        }
+        return users;
+    }
 }
