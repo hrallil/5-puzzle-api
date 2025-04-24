@@ -14,11 +14,6 @@ public class JWTutil {
     private final SignatureAlgorithm alg = SignatureAlgorithm.HS512;
     private final SecretKey SECRET_KEY = Keys.secretKeyFor(alg);
     private final long EXPIRATION_TIME = 36000000; // 1 hour in milliseconds
-
-    public JWTutil(){
-
-    }
-
     
     public String generateToken(String username) {
         System.out.println("Generating token for user: " + username + "with key" + SECRET_KEY);
@@ -31,5 +26,26 @@ public class JWTutil {
                 .signWith(SECRET_KEY)
                 .compact();
         return token;
+    }
+
+    public Boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder()
+                .setSigningKey(SECRET_KEY)
+                .build()
+                .parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public String getUsernameFromToken(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(SECRET_KEY)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 }

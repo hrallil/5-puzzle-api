@@ -9,7 +9,7 @@ import com.example.five_puzzle_api.models.User;
 
 @Component
 public class Data {
-    // since the hashmaps act like the "database" ive made the whole database act like the repository  
+    // since the hashmaps act like the "database" ive made the whole Data class act like a repository  
     private final HashMap<String,User> users;
     private final HashMap<String, Game> games;
 
