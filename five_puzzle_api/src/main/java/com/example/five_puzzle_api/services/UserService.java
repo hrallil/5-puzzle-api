@@ -6,15 +6,15 @@ import org.springframework.stereotype.Service;
 
 import com.example.five_puzzle_api.Data;
 import com.example.five_puzzle_api.models.User;
-import com.example.five_puzzle_api.util.JWTutil;
+import com.example.five_puzzle_api.security.JWTService;
 
 @Service
 public class UserService {
     private final Data data;
-    private final JWTutil jwtUtil;
+    private final JWTService jwtUtil;
 
     @Autowired
-    public UserService(Data data, JWTutil jwtUtil) {
+    public UserService(Data data, JWTService jwtUtil) {
         this.data = data;
         this.jwtUtil = jwtUtil;
     }

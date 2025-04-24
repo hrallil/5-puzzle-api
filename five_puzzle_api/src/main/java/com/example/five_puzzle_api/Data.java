@@ -55,4 +55,12 @@ public class Data {
     public Game getGame(String id) {
         return games.get(id);
     }
+
+    public int getGameCount() {
+        return games.size();
+    }
+
+    public int getUserCount() {
+        return users.size();
+    }
 }

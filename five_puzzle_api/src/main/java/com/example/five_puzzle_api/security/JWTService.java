@@ -1,4 +1,4 @@
-package com.example.five_puzzle_api.util;
+package com.example.five_puzzle_api.security;
 import java.util.Date;
 
 import javax.crypto.SecretKey;
@@ -10,7 +10,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 @Component
-public class JWTutil {
+public class JWTService {
     private final SignatureAlgorithm alg = SignatureAlgorithm.HS512;
     private final SecretKey SECRET_KEY = Keys.secretKeyFor(alg);
     private final long EXPIRATION_TIME = 36000000; // 1 hour in milliseconds
