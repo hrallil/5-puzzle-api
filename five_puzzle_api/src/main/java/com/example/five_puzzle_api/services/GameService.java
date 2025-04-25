@@ -25,6 +25,7 @@ public class GameService {
             throw new RuntimeException("User not found");
         }
         Game newGame = new Game(gameId, user.getId());
+        newGame.initGameState();
         data.addGames(newGame);
         return newGame;
     }

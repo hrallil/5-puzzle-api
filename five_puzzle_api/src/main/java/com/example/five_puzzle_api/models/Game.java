@@ -5,25 +5,24 @@ import java.util.ArrayList;
 public class Game {
     private final String id; // string as the id should be able to be unique, for now i have it as a counter
     private final String userId; // to see what user is associated with the game
-    private final int[][] gameState; // sat to string to begin with, will be changed to some 2d array later on
+    private int[][] gameState; 
     private final int boardSize = 4; // size of the board, 4x4 for the 15 puzzle
     private final ArrayList<Move> moves = new ArrayList<>();
+    private boolean isSolved = false; 
 
     public Game(String id, String userId) {
         this.id = id;
         this.userId = userId;
-        this.gameState = initGameState(); 
+        this.gameState = new int[][] {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 15, 0}
+        };
     }
 
-    private int[][] initGameState() {
-        
-        int[][] initialState = {
-            {1, 2, 3, 4},
-            {5, 6, 7, 8}, 
-            {9, 10, 11, 12},
-            {13, 14, 15, 0} 
-        };
-        return shuffleGameState(initialState, 100);
+    public void initGameState() {
+        this.gameState = shuffleGameState(this.gameState, 100);
     }
 
     public int[][] shuffleGameState(int[][] gameState, int shuffleCount) {
@@ -93,6 +92,7 @@ public class Game {
             gameState[zeroX][zeroY] = gameState[moveX][moveY];
             gameState[moveX][moveY] = 0;
             moves.add(new Move(zeroX, zeroY, moveX, moveY));
+            this.isSolved = isSolved();
         }else{
             throw new IllegalArgumentException("Invalid move");
         }
@@ -114,5 +114,9 @@ public class Game {
 
     public ArrayList<Move> getMoves() {
         return this.moves;
+    }
+
+    public boolean getIsSolved() {
+        return this.isSolved;
     }
 }

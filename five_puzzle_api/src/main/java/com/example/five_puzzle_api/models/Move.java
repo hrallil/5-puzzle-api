@@ -28,5 +28,9 @@ public class Move {
     public int getY2() {
         return y2;
     }
+
+    public int getMoveX() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }
