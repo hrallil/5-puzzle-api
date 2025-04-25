@@ -44,6 +44,4 @@ class GameServiceTest {
         assert(dataMock.getGames().get(gameId) != null);
         assert(dataMock.getGames().get(gameId).getUserId().equals(user.getId()));
     }
-
-
 }

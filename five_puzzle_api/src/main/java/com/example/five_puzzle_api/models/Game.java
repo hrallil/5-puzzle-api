@@ -12,7 +12,7 @@ public class Game {
     public Game(String id, String userId) {
         this.id = id;
         this.userId = userId;
-        this.gameState = initGameState();
+        this.gameState = initGameState(); 
     }
 
     private int[][] initGameState() {

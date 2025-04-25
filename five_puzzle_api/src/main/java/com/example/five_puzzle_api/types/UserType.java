@@ -13,4 +13,17 @@ public enum UserType {
     public String getUserType() {
         return userType;
     }
+
+    @Override
+    public String toString() {
+        switch (userType) {
+            case "user" -> {
+                return "USER";
+            }
+            case "admin" -> {
+                return "ADMIN";
+            }
+            default -> throw new IllegalArgumentException("Unknown user type: " + userType);
+        }
+    }
 }

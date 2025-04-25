@@ -20,14 +20,21 @@ public class GameService {
     public Game createGame(User user) {
         // Create a new game for the user
         String gameId = String.valueOf(data.getGames().size() + 1);
+        User userFromData = this.data.getUser(user.getId());
+        if (userFromData == null) {
+            throw new RuntimeException("User not found");
+        }
         Game newGame = new Game(gameId, user.getId());
         data.addGames(newGame);
         return newGame;
     }
 
     public Game getGame(String gameId) {
-        // Retrieve the game by its ID
-        return data.getGame(gameId);
+        Game game = data.getGame(gameId);
+        if (game == null) {
+            throw new RuntimeException("Game not found");
+        }
+        return game;
     }
 
     public Game applyMove(String gameId, int moveX, int moveY) {

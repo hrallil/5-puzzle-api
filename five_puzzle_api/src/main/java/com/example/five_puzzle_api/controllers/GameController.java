@@ -29,11 +29,12 @@ public class GameController {
         try {
 
             Game game = gameService.getGame(gameId);
-            if (game == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Game not found");
-            }
+
             return ResponseEntity.ok(game);
         } catch (Exception e) {
+            if (e.getMessage().contains("Game not found")) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Game not found");
+            }
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Game creation failed with error: " + e.getMessage());
         }
     }
@@ -47,14 +48,14 @@ public class GameController {
             int moveX = moveRequest.getX();
             int moveY = moveRequest.getY();
             Game game = gameService.applyMove(gameId, moveX, moveY);
-            if (game == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Game not found");
-            }
             return ResponseEntity.ok(game);
 
         } catch (Exception e) {
             if (e.getMessage().contains("Game not found")) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Game not found");
+            }
+            if (e.getMessage().contains("Invalid move")) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid move");
             }
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Move application failed with error: " + e.getMessage());
 
@@ -73,6 +74,9 @@ public class GameController {
             Game game = gameService.createGame(user);
             return ResponseEntity.ok(game);
         } catch (Exception e) {
+            if (e.getMessage().contains("User not found")) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            }
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Game creation failed with error: " + e.getMessage());
         }
     }

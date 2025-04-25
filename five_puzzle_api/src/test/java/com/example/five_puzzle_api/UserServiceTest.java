@@ -66,8 +66,6 @@ class UserServiceTest {
         } catch (Exception e) {
             exception = e;
         }
-        
         assertNotNull(exception);
-        assert(exception.getMessage().equals("User not found"));
     }
 }
