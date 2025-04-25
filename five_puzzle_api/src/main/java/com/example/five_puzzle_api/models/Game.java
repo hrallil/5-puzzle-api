@@ -111,4 +111,8 @@ public class Game {
     public int[][] getGameState() {
         return this.gameState;
     }    
+
+    public ArrayList<Move> getMoves() {
+        return this.moves;
+    }
 }
